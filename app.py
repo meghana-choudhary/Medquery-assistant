@@ -5,7 +5,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 import uvicorn
-from util.generate_llm_response import get_llm_response  # ← Import here
+from util.generate_llm_response import get_llm_response
+from util.generate_nested_query import get_nested_query
 
 # Initialize FastAPI app
 app = FastAPI(title="Medical Chatbot API")
@@ -23,29 +24,33 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
+
 # Define request model
 class ChatRequest(BaseModel):
+    history: str
     message: str
+
 
 # Define response model
 class ChatResponse(BaseModel):
     response: str
 
+
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+
 @app.post("/chat")
 async def chat(request: ChatRequest):
     try:
+        contextual_query = get_nested_query(request.history, request.message)
         # Use the modularized LLM response function
-        response = get_llm_response(request.message)
+        response = get_llm_response(contextual_query)
         return {"response": response}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 if __name__ == "__main__":
     uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)
-
-
-

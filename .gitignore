@@ -1,3 +1,4 @@
 .env
 app1.py
+__pycache__/
 

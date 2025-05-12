@@ -42,7 +42,6 @@ def extract_json_object(text: str) -> Optional[Dict[str, Any]]:
         # No pattern matching '{...}' found
         print("No JSON object pattern found in the text.")
         return None
-    
 
 
 def get_nested_query(past_queries: str, current_question: str):
