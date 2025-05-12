@@ -2,7 +2,7 @@ from langchain_groq import ChatGroq
 from langchain.prompts import PromptTemplate
 import re
 import json
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional
 import os
 from dotenv import load_dotenv
 
