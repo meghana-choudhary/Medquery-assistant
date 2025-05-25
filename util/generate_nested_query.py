@@ -33,7 +33,7 @@ def extract_json_object(text: str) -> Optional[Dict[str, Any]]:
                 print(
                     f"Warning: Extracted JSON is not an object (dict): {type(parsed_json)}"
                 )
-                return None  # Or handle arrays/other types if needed
+                return None 
         except json.JSONDecodeError:
             # Handle cases where the extracted text is not valid JSON
             print(f"Error: Failed to decode JSON from extracted text: {potential_json}")
