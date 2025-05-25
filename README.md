@@ -21,7 +21,7 @@
 | Layer       | Technology                      |
 |------------|----------------------------------|
 | Frontend   | HTML, CSS, JavaScript            |
-| Backend    | Python (FastAPI recommended)     |
+| Backend    | FastAPI (Python) – handles API routes and server logic efficiently    |
 | LLMs       | LLaMA 3.3 70B, Gemini 2.5 Flash   |
 | Chat Logic | Custom context + nested query engine |
 
